@@ -1,3 +1,0 @@
-/home/sparrow/Documents/WashU/521/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/sparrow/Documents/WashU/521/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/sparrow/Documents/WashU/521/cmake-build-debug/CMakeFiles/521.dir
