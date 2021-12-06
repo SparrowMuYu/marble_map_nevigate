@@ -7,5 +7,11 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network)
 find_package(Marble REQUIRED)
 
-add_executable(521 main.cpp) # Map_And_Navigation/Map_Display.h Map_And_Navigation/Map_Display.cpp)
+SET(CMAKE_AUTOMOC ON)
+
+add_executable(521 main.cpp
+        marble_map/map_track/map_track.cpp
+        marble_map/map_track/map_track.h
+        marble_map/amb_sim/amb_sim.cpp
+        marble_map/amb_sim/amb_sim.h)
 target_link_libraries(521 Marble Qt5::Widgets Qt5::Network)
