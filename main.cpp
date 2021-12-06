@@ -11,9 +11,11 @@ int main(int argc, char** argv)
     QApplication app(argc,argv);
 
     map_track *marble_map = new map_track();
-
+    // example -90.31, 38.65
+    float lon = atof(argv[1]);
+    float lat = atof(argv[2]);
     marble_map->set_usr_present_search_area(
-            -90.31, 38.65, 1);
+            lon, lat, 1);
     marble_map->search_set_hos();
     marble_map->set_target_present();
     marble_map->track();
