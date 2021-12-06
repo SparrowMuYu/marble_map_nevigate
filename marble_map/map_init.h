@@ -14,6 +14,7 @@
 #include <marble/ReverseGeocodingRunnerManager.h>
 
 #include "map_track/map_track.h"
+#include "amb_sim//amb_sim.h"
 
 class map_init
 {
@@ -31,8 +32,8 @@ public:
 
 private:
     const QString map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
-
     map_track *map_tracker;
+    amb_sim *amb;
 
     Marble::MarbleWidget *map_widget;
     Marble::MarbleModel *model;
@@ -41,6 +42,8 @@ private:
 
     Marble::RoutingManager *r_manager;
     Marble::RouteRequest *r_request;
+
+    Marble::GeoDataDocument *doc;
 };
 
 #endif //INC_521_MAP_INIT_H

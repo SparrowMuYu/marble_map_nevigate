@@ -15,6 +15,11 @@ map_init::map_init() {
     map_widget->setProjection(Marble::Mercator);
     r_manager = map_widget->model()->routingManager();
     r_request = r_manager->routeRequest();
+
+    doc = new Marble::GeoDataDocument;
+    amb = new amb_sim();
+
+    doc->append(amb->get_amb_place_mark());
 }
 
 map_init::~map_init() {

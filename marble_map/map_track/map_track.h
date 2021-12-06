@@ -13,34 +13,62 @@
 #include <marble/SearchRunnerManager.h>
 #include <marble/ReverseGeocodingRunnerManager.h>
 
-class map_track
+#include "../amb_sim/amb_sim.h"
+
+class map_track : public QWidget
 {
+Q_OBJECT
 public:
-    map_track() {};
-    void show_map (Marble::MarbleWidget *widget,
-                   Marble::RouteRequest *request);
-    void track (Marble::RoutingManager *manager,
-                Marble::RouteRequest *request);
+    map_track(QWidget *parent = 0);
+    void start_sim();
+
+public:
+    void show_map ();
+    void track ();
+    void renew_route_hos ();
+    void search_set_hos ();
     void set_usr_present_search_area (qreal longitude,
                                       qreal latitude,
-                                      int if_civil);
-    void search_set_target (Marble::SearchRunnerManager *manager);
-    void set_target_present (qreal longitude,
-                             qreal latitude);
+                                      int if_search_hos);
+    qreal find_distance (Marble::GeoDataCoordinates coord);
+    qreal find_distance ();
     Marble::GeoDataCoordinates get_usr_present ();
 
+public slots:
+    void setCarCoordinates(const Marble::GeoDataCoordinates &coord);
+    void renew_route_target ();
+    void set_target_present ();
+    void update_hos ();
+
 private:
-    const qreal search_range = 0.03;
+    const qreal search_range = 0.05;
     const int center_index = 0;
-    const qreal map_distance = 1;
+    const qreal map_distance = 2;
     const qreal altitude = 0.0;
     const Marble::GeoDataCoordinates::Unit coord_unit =
             Marble::GeoDataCoordinates::Degree;
 
+    const QString map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
+
     QVector<Marble::GeoDataPlacemark*> search_result;
     Marble::GeoDataCoordinates usr_present;
+    Marble::GeoDataCoordinates hos_present;
     Marble::GeoDataCoordinates target_present;
     Marble::GeoDataLatLonBox search_area;
+
+    qreal usr_lon, usr_lat;
+
+    amb_sim *amb;
+
+    Marble::MarbleWidget *map_widget;
+    Marble::MarbleModel *model;
+    Marble::SearchRunnerManager *s_manager;
+    Marble::ReverseGeocodingRunnerManager *rg_manager;
+
+    Marble::RoutingManager *r_manager;
+    Marble::RouteRequest *r_request;
+
+    Marble::GeoDataDocument *doc;
 };
 
 #endif //INC_521_MAP_TRACK_H
