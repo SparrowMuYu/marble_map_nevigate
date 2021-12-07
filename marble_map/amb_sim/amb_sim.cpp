@@ -20,7 +20,7 @@ amb_sim::amb_sim() {
 
 void amb_sim::startWork()
 {
-    updta_timer->setInterval(10);
+    updta_timer->setInterval(100);
     connect(updta_timer, SIGNAL(timeout()), this, SLOT(iterate()));
     updta_timer->start();
 }
@@ -38,22 +38,21 @@ void amb_sim::iterate()
         emit coordinatesChanged(coord);
     }
 
-
     if (lon < p_lon) {
-        if (p_lon - lon > 0.001) {
+        if (p_lon - lon > 0.0001) {
             lon = lon + 0.0001;
         } else {
             reach_lon = true;
         }
     } else {
-        if (p_lon > 0.001) {
+        if (lon - p_lon > 0.0001) {
             lon = lon - 0.0001;
         } else {
             reach_lon = true;
         }
     }
     if (lat < p_lat) {
-        if (p_lat > 0.0001) {
+        if (p_lat - lat > 0.0001) {
             lat = lat + 0.0001;
         } else {
             reach_lat = true;
